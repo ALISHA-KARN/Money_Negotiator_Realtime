@@ -16,11 +16,17 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const allowedOrigin = "https://money-negotiator-realtime.onrender.com";
+
 const io = new Server(server, {
-  cors: { origin: "*" },
+  cors: { origin: allowedOrigin },
 });
 
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigin,
+  methods: ["GET", "POST"],
+}));
+
 app.use(express.json());
 
 // ✅ Serve static files
